@@ -4,18 +4,18 @@ export default function SpalinyAut() {
   const [litryNa100km, setLitryNa100km] = useState(7);
   const [iloscAut, setIloscAut] = useState(1);
   const [suwak, setSuwak] = useState(50);
-  const [wynik, setWynik] = useState(0);
+  const [wynikdzule, setWynikDzule] = useState(0);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    let wartosc_litra_dzule = 29520000
-    let odleglosc_calkowita = iloscAut * kmRoku
-    let zuzyte_paliwo = odleglosc_calkowita * (litryNa100km / 100)
-    let energia = zuzyte_paliwo * wartosc_litra_dzule
-    let energia_skuteczna = energia * (suwak/100)
+    let wartosc_litra_dzule = 29520000;
+    let odleglosc_calkowita = iloscAut * kmRoku;
+    let zuzyte_paliwo = odleglosc_calkowita * (litryNa100km / 100);
+    let energia = zuzyte_paliwo * wartosc_litra_dzule;
+    let energia_skuteczna_dzule = energia * (suwak / 100);
 
-    setWynik(energia_skuteczna);
+    setWynikDzule(energia_skuteczna_dzule);
   };
 
   return (
@@ -74,6 +74,7 @@ export default function SpalinyAut() {
                 onChange={(e) => setSuwak(e.target.value)}
                 className="w-full bg-[#333] text-white"
               />
+              <p className="text-white mt-2">{suwak}%</p>
             </div>
             <div>
               <button
@@ -85,9 +86,33 @@ export default function SpalinyAut() {
             </div>
           </form>
         </div>
-        <div className="pl-4">
+        <div className="pl-4 cursor-default">
           <h2 className="p-2">Wyniki obliczeń:</h2>
-          <p>{wynik} dżuli</p>
+          <p>{wynikdzule.toFixed(2)} dżuli</p>
+          <p>{(wynikdzule / 1000).toFixed(2)} kilodżuli (kJ)</p>
+          <p>{(wynikdzule / 1000000).toFixed(2)} megadżuli</p>
+          <h2>Albo inaczej:</h2>
+          <div className="relative inline-block group">
+            <p>{(wynikdzule / 4184).toFixed(2)} kilokalorie (kcal)</p>
+            <div className="absolute left-1/2 transform -translate-x-1/2 bottom-full mb-2 w-64 bg-gray-800 text-white text-center text-sm rounded py-2 px-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-10">
+              To odpowiada około:
+              <ul className="mt-1 list-disc list-inside text-left">
+                <li>{(wynikdzule / 4184 / 95).toFixed(1)} 🍎 jabłek</li>
+                <li>{(wynikdzule / 4184 / 80).toFixed(1)} 🍞 kromek chleba</li>
+                <li>{(wynikdzule / 4184 / 250).toFixed(1)} 🍫 batonów czekoladowych</li>
+                <li>{(wynikdzule / 4184 / 285).toFixed(1)} 🍕 kawałków pizzy</li>
+                <li>{(wynikdzule / 4184 / 800).toFixed(2)} 🌯 kebabów</li>
+                <li>{(wynikdzule / 4184 / 300).toFixed(1)} 🍔 cheeseburgerów</li>
+                <li>{(wynikdzule / 4184 / 200).toFixed(1)} 🍗 nóżek z kurczaka</li>
+              </ul>
+            </div>
+          </div>
+          <p>{(wynikdzule / 3600).toFixed(2)} watogodziny (Wh)</p>
+          <p>{(wynikdzule / 3_600_000).toFixed(2)} kilowatogodziny (kWh)</p>
+          <p>
+            {(wynikdzule / 420000).toFixed(2)} litrów zagotowanej wody (od 20°C
+            do 100°C)
+          </p>
         </div>
       </div>
     </div>
