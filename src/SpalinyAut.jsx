@@ -20,7 +20,7 @@ export default function SpalinyAut() {
 
   return (
     <div className="m-5 bg-[#1f1f1f] p-5 rounded-2xl border-1">
-      <h1 className="text-2xl text-white">Spalanie aut</h1>
+      <h1 className="text-2xl text-white font-bold">Spalanie aut</h1>
       <div className="flex">
         <div>
           <h2 className="p-2">Parametry:</h2>
