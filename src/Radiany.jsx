@@ -51,6 +51,11 @@ export default function Radiany() {
           placeholder="Np. 3.14"
         />
       </div>
+      <div>
+        <label>Cos: </label><br />
+        <label>Sin: </label><br />
+        <label>Tag: </label><br />
+      </div>
     </div>
   );
 }
