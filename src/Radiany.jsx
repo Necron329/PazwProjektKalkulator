@@ -1,24 +1,29 @@
 import { useState } from "react";
 
 export default function Radiany() {
-  const [value, setValue] = useState("");
-  const [mode, setMode] = useState("deg");
+  const [degValue, setDegValue] = useState("");
+  const [radValue, setRadValue] = useState("");
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
+  const handleDegChange = (e) => {
+    const value = e.target.value;
+    setDegValue(value);
+    if (value === "") {
+      setRadValue("");
+    } else {
+      const radians = (parseFloat(value) * Math.PI) / 180;
+      setRadValue(radians.toFixed(4));
+    }
   };
 
-  const toggleMode = () => {
-    setValue("");
-    setMode(mode === "deg" ? "rad" : "deg");
-  };
-
-  const convertValue = () => {
-    const number = parseFloat(value);
-    if (isNaN(number)) return "";
-    return mode === "deg"
-      ? ((number * Math.PI) / 180).toFixed(4) + " rad"
-      : ((number * 180) / Math.PI).toFixed(2) + "°";
+  const handleRadChange = (e) => {
+    const value = e.target.value;
+    setRadValue(value);
+    if (value === "") {
+      setDegValue("");
+    } else {
+      const degrees = (parseFloat(value) * 180) / Math.PI;
+      setDegValue(degrees.toFixed(2));
+    }
   };
 
   return (
@@ -27,25 +32,24 @@ export default function Radiany() {
         Radiany {"<-->"} Stopnie
       </h1>
       <div className="mb-4">
-        <label className="block text-white mb-1">
-          Podaj kąt w {mode === "deg" ? "stopniach" : "radianach"}:
-        </label>
+        <label className="block text-white mb-1">Podaj kąt w stopniach:</label>
         <input
           type="number"
-          value={value}
-          onChange={handleChange}
+          value={degValue}
+          onChange={handleDegChange}
           className="w-full p-2 rounded bg-[#333] text-white"
-          placeholder={`Np. ${mode === "deg" ? "180" : "3.14"}`}
+          placeholder="Np. 180"
         />
       </div>
       <div className="mb-4">
-        <button
-          onClick={toggleMode}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
-        >
-          Zmień na {mode === "deg" ? "radiany" : "stopnie"}
-        </button>
-        <p className="text-white">Wynik: {convertValue()}</p>
+        <label className="block text-white mb-1">Podaj kąt w radianach:</label>
+        <input
+          type="number"
+          value={radValue}
+          onChange={handleRadChange}
+          className="w-full p-2 rounded bg-[#333] text-white"
+          placeholder="Np. 3.14"
+        />
       </div>
     </div>
   );

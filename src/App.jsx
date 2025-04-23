@@ -1,18 +1,17 @@
-import { useState } from 'react'
 import Header from "./Header"
 import SpalinyAut from './SpalinyAut'
-import Radiany from './Radiany'
+import Footer from "./Footer"
+import Radiany from "./Radiany"
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Header />
-      <div className='w-full flex'>
+      <div className='w-full flex min-h-[72.5vh]'>
         <SpalinyAut />
         <Radiany />
       </div>
+      <Footer />
     </>
   )
 }
